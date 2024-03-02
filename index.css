@@ -1,0 +1,15 @@
+.spinwheel {
+    border: 6px solid transparent;
+      border-top-color: #f39b6d;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      animation: spin 1s linear infinite;
+      position: absolute;
+      
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
