@@ -9,7 +9,7 @@ const getRes = async () => {
         messages: [
             {
                 role: 'user',
-                content: 'Give me a fun way to wash dishes',
+                content: 'Return single layer array with fun way to mop on index 0, recommended time on index 1',
             },
         ],
         temperature: 0,
@@ -21,4 +21,5 @@ const getRes = async () => {
     console.log(res.choices[0].message.content);
 
 }
+
 getRes();

@@ -35,7 +35,7 @@ const addNewChore = (chores) => {
         })
     }
 
-    console.log(chores);
+    
 
 }
 addNewChore(chores);
@@ -43,8 +43,11 @@ addNewChore(chores);
 
 const showPopup = async (choreItem) => {
 
-    const message = await getRes(choreItem.textContent);
-    console.log(message);
+    let message = await getRes(choreItem.textContent);
+    message = JSON.parse(message);
+    console.log(message[0]);
+    console.log("Recommended time: " + message[1]);
+
     choreItem.innerHTML = choreItem.innerHTML.replace('<div class="spinwheel"></div>', '');
 
 }
@@ -54,7 +57,7 @@ const getRes = async (chore) => {
         messages: [
             {
                 role: 'user',
-                content: `Give me a fun way to ${chore}`,
+                content: `Return single layer array with fun way to ${chore} on index 0, recommended time on index 1`,
             },
         ],
         temperature: 0,
