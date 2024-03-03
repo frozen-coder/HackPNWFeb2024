@@ -9,7 +9,7 @@ const getRes = async () => {
         messages: [
             {
                 role: 'user',
-                content: 'Return single layer array with fun way to mop on index 0, recommended time on index 1',
+                content: '',
             },
         ],
         temperature: 0,

@@ -193,6 +193,19 @@
   height: 102px;
   position: absolute;
   border-radius: 20px;
+  pointer-events:none;
+}
+#submitNew {
+  top: 3px;
+  left: -120px;
+  width: 112px;
+  height: 102px;
+  position: absolute;
+  border-radius: 20px;
+  z-index: 1000;
+}
+.unclickable {
+  pointer-events:none;
 }
 .desktop3-plussquare {
   top: 888px;
@@ -200,6 +213,7 @@
   width: 72px;
   height: 72px;
   position: absolute;
+  pointer-events:none
 }
 .desktop3-rectangle22 {
   top: 873px;
@@ -326,6 +340,7 @@
 .desktop3-text20 {
   color: rgba(210, 210, 210, 1);
   height: auto;
+  width: 200%;
   font-size: 36px;
   font-style: Regular;
   text-align: left;

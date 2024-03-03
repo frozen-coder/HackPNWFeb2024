@@ -6,7 +6,7 @@ const openai = new OpenAI({
 
 const choreForm = document.getElementById('choreForm');
 const choresList = document.getElementById('choresList');
-let chores = ["Sweep the floor", "Wash the Dishes", "Take out the trash", "Cook breakfast", "Cook lunch", "Cook dinner", "Vacuum the floor", "Mop the floor"];
+let chores = ["Sweep the floor", "Wash the Dishes", "Take out the trash", "Cook breakfast"];
 
 
 choreForm.addEventListener('submit', (event) => {
@@ -22,7 +22,7 @@ const addNewChore = (chores) => {
     choresList.innerHTML = "";
     for (let i = 0; i < chores.length; i++)
     {
-        choresList.innerHTML += `<li><button class="popup">${chores[i]}</button></li>`
+        choresList.innerHTML += `<div class="taskDiv"><button class="popup">${chores[i]}</button></div>`
     }
     const listItems = document.getElementsByClassName('popup');
     for (let i = 0; i < listItems.length; i++)
@@ -56,7 +56,7 @@ const getRes = async (chore) => {
         messages: [
             {
                 role: 'user',
-                content: `Return single layer array with fun way to ${chore} on index 0, recommended time on index 1`,
+                content: `Return single layer array with fun way to ${chore} on index 0, recommended time (in seconds) on index 1`,
             },
         ],
         temperature: 0,
