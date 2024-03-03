@@ -42,7 +42,6 @@ body {
     height: 85px;
     border-radius: 15px;
     
-    
 
 }
 
@@ -59,6 +58,17 @@ body {
 .taskDiv button {
     margin: 2.4% 0 0 0;
     font-size: 1.5em;
+    display: inline;
+}
+.listButton {
+   
+    display: inline;
+    width: 85px;
+    height: 85px;
+    background-color: rgb(164, 59, 255);
+    border: none;
+    border-radius: 20px !important;
+    
 }
 #customChore {
     width: 75%;
@@ -93,13 +103,12 @@ body {
     position: absolute;
     pointer-events: none;
 }
-#listSquare {
-    padding: 3px;
-    width: 45px;
-    height: 45px;
-
-    z-index: -1;
-    background-color: inherit;
-    border: none;
+.noBack {
+    background: none !important;
+    padding: 0px;
+    margin: 0px -10px 0 0px !important;
+    border-radius: 20px !important;
+    
+    
 
 }

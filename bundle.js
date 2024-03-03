@@ -1,7 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: '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',
+    apiKey: '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',
     dangerouslyAllowBrowser: true
 });
 
@@ -23,13 +23,13 @@ const addNewChore = (chores) => {
     choresList.innerHTML = "";
     for (let i = 0; i < chores.length; i++)
     {
-        choresList.innerHTML += `<div class="taskDiv"><button value=${chores[i]} class="popup">${chores[i]}</button></div><button value=${chores[i]} class="popup"></button>`
+        choresList.innerHTML += `<div class="taskDiv"><button value="${chores[i]}" class="popup">${chores[i]}</button><button style="float: right;" value="${chores[i]}" class="popup noBack"><img class="listButton" src="expand-icon-md.webp"></button></div>`
     }
     const listItems = document.getElementsByClassName('popup');
     for (let i = 0; i < listItems.length; i++)
     {
         listItems[i].addEventListener('click', () => {
-            listItems[i].innerHTML += '<div class="spinwheel"></div>'
+
             showPopup(listItems[i]);
             
         })
@@ -51,7 +51,6 @@ const showPopup = async (choreItem) => {
     localStorage.setItem('rec', message[0]);
     localStorage.setItem('chore', choreItem.value);
 
-    choreItem.innerHTML = choreItem.innerHTML.replace('<div class="spinwheel"></div>', '');
     window.open("testTimer.html", "_blank")
 
 

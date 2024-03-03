@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: '',
+    apiKey: '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',
     dangerouslyAllowBrowser: true
 });
 
@@ -22,13 +22,13 @@ const addNewChore = (chores) => {
     choresList.innerHTML = "";
     for (let i = 0; i < chores.length; i++)
     {
-        choresList.innerHTML += `<div class="taskDiv"><button value=${chores[i]} class="popup">${chores[i]}</button></div><button value=${chores[i]} class="popup"></button>`
+        choresList.innerHTML += `<div class="taskDiv"><button value="${chores[i]}" class="popup">${chores[i]}</button><button style="float: right;" value="${chores[i]}" class="popup noBack"><img class="listButton" src="expand-icon-md.webp"></button></div>`
     }
     const listItems = document.getElementsByClassName('popup');
     for (let i = 0; i < listItems.length; i++)
     {
         listItems[i].addEventListener('click', () => {
-            listItems[i].innerHTML += '<div class="spinwheel"></div>'
+
             showPopup(listItems[i]);
             
         })
@@ -50,7 +50,6 @@ const showPopup = async (choreItem) => {
     localStorage.setItem('rec', message[0]);
     localStorage.setItem('chore', choreItem.value);
 
-    choreItem.innerHTML = choreItem.innerHTML.replace('<div class="spinwheel"></div>', '');
     window.open("testTimer.html", "_blank")
 
 
