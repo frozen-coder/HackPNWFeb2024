@@ -21,6 +21,8 @@ var toCount;
 function subm(){
     display("submit", "start");
     seconds = Number(secondsInput.value);
+	seconds = seconds*60;
+
     secondsInput.style.display = "none";
     counting();
 }
