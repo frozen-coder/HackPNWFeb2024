@@ -22,7 +22,7 @@ const addNewChore = (chores) => {
     choresList.innerHTML = "";
     for (let i = 0; i < chores.length; i++)
     {
-        choresList.innerHTML += `<div class="taskDiv"><button class="popup">${chores[i]}</button></div>`
+        choresList.innerHTML += `<div class="taskDiv"><button class="popup">${chores[i]}</button></div> ss<button exit="button">Can you click me?</button>`
     }
     const listItems = document.getElementsByClassName('popup');
     for (let i = 0; i < listItems.length; i++)
