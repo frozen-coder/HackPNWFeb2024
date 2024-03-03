@@ -1,7 +1,7 @@
 export default class Timer{
     constructor(root){
      
-        root.innterHTML = Timer.getHTML();
+        root.innerHTML = Timer.getHTML();
 
         this.el = {
             minutes: root.querySelector(",=.timer__part--minutes"),
@@ -18,7 +18,7 @@ export default class Timer{
 
 
         //Where chatgpt will set the timer
-        this.remainingSeconds = gptseconds;
+        this.remainingSeconds = 90;
        
         this.el.control.addEventListener("click",() => {
             //TODO: add code 
@@ -30,22 +30,22 @@ export default class Timer{
         });
 
         //Using a variable from chatgpt
-       // this.el.reset.addEventListener("click". () => {
+        this.el.reset.addEventListener("click". () => {
             //TODO: add code
 
-            //const inputMinutes = prompt("Enter number of minutes:");
-            //if(inputMinutes <60){
-            //this.stop();
-            //this.remainingSeconds = inputMinutes * 60;
-            //this.UpdateInterfaceTime();
-            //}
-        //});
+            const inputMinutes = prompt("Enter number of minutes:");
+            if(inputMinutes <60){
+            this.stop();
+            this.remainingSeconds = inputMinutes * 60;
+            this.UpdateInterfaceTime();
+            }
+        });
         }
 
 
 
 
-        
+
     UpdateInterfaceTime(){
         const minutes = Math.floor(this.remainingSeconds / 60);
         const seconds = this.remainingSeconds % 60;
