@@ -47,8 +47,10 @@ const showPopup = async (choreItem) => {
     message = JSON.parse(message);
     console.log(message[0]);
     console.log("Recommended time: " + message[1]);
+    localStorage.setItem('seconds', message[1]);
 
     choreItem.innerHTML = choreItem.innerHTML.replace('<div class="spinwheel"></div>', '');
+
 
 }
 const getRes = async (chore) => {
