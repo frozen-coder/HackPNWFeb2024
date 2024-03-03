@@ -13,3 +13,83 @@
         transform: rotate(360deg);
     }
 }
+body {
+    padding: 0px;
+    margin: 0px;
+}
+#bar {
+    width: 98%;
+    height: 5vh;
+    background-color: rgb(29, 13, 58);
+    
+    border-radius: 0px 0px 80px 50px;
+    color: white;
+    font-size: 3em;
+    padding: 20px 0px 50px 30px;
+}
+.popup {
+    background-color: rgb(207, 205, 205);
+    
+    border:none;
+    cursor: pointer;
+    font-weight: bold;
+    
+}
+.taskDiv {
+    background-color: rgb(207, 205, 205);
+    margin: 2%;
+    width: 75%;
+    height: 85px;
+    border-radius: 15px;
+    
+    
+
+}
+
+#choreForm {
+    background-color: rgb(29, 13, 58);
+    position: fixed;
+    width: 99%;
+    bottom: 0;
+    height: 7%;
+    border-radius: 5px 15px 0 0;
+    padding: 1% 0 1% 0;
+    margin: 0px;
+}
+.taskDiv button {
+    margin: 2.4% 0 0 0;
+    font-size: 1.5em;
+}
+#customChore {
+    width: 75%;
+    height: 100%;
+}
+#choreForm label {
+    margin-left: 0.5%;
+    padding-bottom: 20%;
+    color: white;
+    font-size: 2em;
+}
+#choreForm button {
+    
+    padding: 2px 0px 0px 0px;
+    background-color: inherit;
+    border:none;
+    cursor: pointer;
+    appearance: none;
+    position: absolute;
+}
+#purpleSquare {
+    padding: 3px;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    z-index: -1;
+}
+#plusSquare {
+    padding: 9.5px 0px 0px 7px;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    pointer-events: none;
+}
