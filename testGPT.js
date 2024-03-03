@@ -27,7 +27,7 @@ const getDiff = async () => {
         messages: [
             {
                 role: 'user',
-                content: 'Give a list of fun ways to wash dishes',
+                content: 'Give a list of fun ways to mop in a JSON array',
             },
         ],
         temperature: 0.8,
@@ -36,7 +36,11 @@ const getDiff = async () => {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     })
-    console.log(res.choices[0].message.content);
+    
+    const processed = JSON.parse(res.choices[0].message.content);
+    console.log(processed);
+    const key = Object.keys(processed)[0];
+    console.log(processed[key])
 
 }
-getDiff();
+

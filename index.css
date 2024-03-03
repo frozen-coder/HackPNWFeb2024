@@ -93,3 +93,13 @@ body {
     position: absolute;
     pointer-events: none;
 }
+#listSquare {
+    padding: 3px;
+    width: 45px;
+    height: 45px;
+
+    z-index: -1;
+    background-color: inherit;
+    border: none;
+
+}

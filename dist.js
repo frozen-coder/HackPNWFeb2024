@@ -1,82 +1,4 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-const OpenAI = require("openai");
-const openai = new OpenAI({
-    apiKey: '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',
-    dangerouslyAllowBrowser: true
-});
-
-const choreForm = document.getElementById('choreForm');
-const choresList = document.getElementById('choresList');
-let chores = ["Sweep the floor", "Wash the Dishes", "Cook breakfast"];
-
-
-choreForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const chore = document.getElementById('customChore').value;
-
-    chores.push(chore);
-    addNewChore(chores);
-    choreForm.reset();
-    
-})
-const addNewChore = (chores) => {
-    choresList.innerHTML = "";
-    for (let i = 0; i < chores.length; i++)
-    {
-        choresList.innerHTML += `<div class="taskDiv"><button value=${chores[i]} class="popup">${chores[i]}</button></div><button value=${chores[i]} class="popup"></button>`
-    }
-    const listItems = document.getElementsByClassName('popup');
-    for (let i = 0; i < listItems.length; i++)
-    {
-        listItems[i].addEventListener('click', () => {
-            listItems[i].innerHTML += '<div class="spinwheel"></div>'
-            showPopup(listItems[i]);
-            
-        })
-    }
-
-    
-
-}
-addNewChore(chores);
-
-
-const showPopup = async (choreItem) => {
-
-    let message = await getRes(choreItem.value);
-    message = JSON.parse(message);
-    console.log(message[0]);
-    console.log("Recommended time: " + message[1]);
-    localStorage.setItem('recTime', message[1]);
-    localStorage.setItem('rec', message[0]);
-    localStorage.setItem('chore', choreItem.value);
-
-    choreItem.innerHTML = choreItem.innerHTML.replace('<div class="spinwheel"></div>', '');
-    window.open("testTimer.html", "_blank")
-
-
-}
-const getRes = async (chore) => {
-    const res = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
-        messages: [
-            {
-                role: 'user',
-                content: `Return single layer array with fun way to ${chore} on index 0, recommended amount of time to take on index 1`,
-            },
-        ],
-        temperature: 0,
-        max_tokens: 500,
-        top_p: .1,
-        frequency_penalty: 0.0,
-        presence_penalty: 0.0,
-    })
-
-    return res.choices[0].message.content;
-
-}
-
-},{"openai":12}],2:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -228,7 +150,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 (function (Buffer){(function (){
 /*!
  * The buffer module from node.js, for the browser.
@@ -2009,7 +1931,7 @@ function numberIsNaN (obj) {
 }
 
 }).call(this)}).call(this,require("buffer").Buffer)
-},{"base64-js":2,"buffer":3,"ieee754":4}],4:[function(require,module,exports){
+},{"base64-js":1,"buffer":2,"ieee754":3}],3:[function(require,module,exports){
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -2096,7 +2018,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MultipartBody = void 0;
@@ -2113,7 +2035,7 @@ class MultipartBody {
 }
 exports.MultipartBody = MultipartBody;
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -2135,7 +2057,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 __exportStar(require("../web-runtime.js"), exports);
 
-},{"../web-runtime.js":9}],7:[function(require,module,exports){
+},{"../web-runtime.js":8}],6:[function(require,module,exports){
 /**
  * Disclaimer: modules in _shims aren't intended to be imported by SDK users.
  */
@@ -2150,7 +2072,7 @@ for (const property of Object.keys(shims)) {
   });
 }
 
-},{"./registry":8,"openai/_shims/auto/runtime":6}],8:[function(require,module,exports){
+},{"./registry":7,"openai/_shims/auto/runtime":5}],7:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setShims = exports.isFsReadStream = exports.fileFromPath = exports.getDefaultAgent = exports.getMultipartRequestOptions = exports.ReadableStream = exports.File = exports.Blob = exports.FormData = exports.Headers = exports.Response = exports.Request = exports.fetch = exports.kind = exports.auto = void 0;
@@ -2192,7 +2114,7 @@ function setShims(shims, options = { auto: false }) {
 }
 exports.setShims = setShims;
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getRuntime = void 0;
@@ -2271,7 +2193,7 @@ function getRuntime({ manuallyImported } = {}) {
 }
 exports.getRuntime = getRuntime;
 
-},{"./MultipartBody.js":5}],10:[function(require,module,exports){
+},{"./MultipartBody.js":4}],9:[function(require,module,exports){
 (function (process,Buffer){(function (){
 "use strict";
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
@@ -3153,7 +3075,7 @@ function isObj(obj) {
 exports.isObj = isObj;
 
 }).call(this)}).call(this,require('_process'),require("buffer").Buffer)
-},{"./_shims/index.js":7,"./error.js":11,"./streaming.js":48,"./uploads.js":49,"./version.js":50,"_process":51,"buffer":3}],11:[function(require,module,exports){
+},{"./_shims/index.js":6,"./error.js":10,"./streaming.js":47,"./uploads.js":48,"./version.js":49,"_process":50,"buffer":2}],10:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -3301,7 +3223,7 @@ class InternalServerError extends APIError {
 }
 exports.InternalServerError = InternalServerError;
 
-},{"./core.js":10}],12:[function(require,module,exports){
+},{"./core.js":9}],11:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -3440,7 +3362,7 @@ exports.fileFromPath = Uploads.fileFromPath;
 exports = module.exports = OpenAI;
 exports.default = OpenAI;
 
-},{"./core.js":10,"./error.js":11,"./uploads.js":49,"openai/pagination":19,"openai/resources/index":44}],13:[function(require,module,exports){
+},{"./core.js":9,"./error.js":10,"./uploads.js":48,"openai/pagination":18,"openai/resources/index":43}],12:[function(require,module,exports){
 "use strict";
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
@@ -3960,7 +3882,7 @@ _AbstractChatCompletionRunner_connectedPromise = new WeakMap(), _AbstractChatCom
             : JSON.stringify(rawContent));
 };
 
-},{"./RunnableFunction.js":17,"./chatCompletionUtils.js":18,"openai/error":11}],14:[function(require,module,exports){
+},{"./RunnableFunction.js":16,"./chatCompletionUtils.js":17,"openai/error":10}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChatCompletionRunner = void 0;
@@ -3995,7 +3917,7 @@ class ChatCompletionRunner extends AbstractChatCompletionRunner_1.AbstractChatCo
 }
 exports.ChatCompletionRunner = ChatCompletionRunner;
 
-},{"./AbstractChatCompletionRunner.js":13,"./chatCompletionUtils.js":18}],15:[function(require,module,exports){
+},{"./AbstractChatCompletionRunner.js":12,"./chatCompletionUtils.js":17}],14:[function(require,module,exports){
 "use strict";
 var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
@@ -4290,7 +4212,7 @@ function str(x) {
     return JSON.stringify(x);
 }
 
-},{"./AbstractChatCompletionRunner.js":13,"openai/error":11,"openai/streaming":48}],16:[function(require,module,exports){
+},{"./AbstractChatCompletionRunner.js":12,"openai/error":10,"openai/streaming":47}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChatCompletionStreamingRunner = void 0;
@@ -4323,7 +4245,7 @@ class ChatCompletionStreamingRunner extends ChatCompletionStream_1.ChatCompletio
 }
 exports.ChatCompletionStreamingRunner = ChatCompletionStreamingRunner;
 
-},{"./ChatCompletionStream.js":15}],17:[function(require,module,exports){
+},{"./ChatCompletionStream.js":14}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ParsingToolFunction = exports.ParsingFunction = exports.isRunnableFunctionWithParse = void 0;
@@ -4359,7 +4281,7 @@ class ParsingToolFunction {
 }
 exports.ParsingToolFunction = ParsingToolFunction;
 
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isPresent = exports.isToolMessage = exports.isFunctionMessage = exports.isAssistantMessage = void 0;
@@ -4380,7 +4302,7 @@ function isPresent(obj) {
 }
 exports.isPresent = isPresent;
 
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -4445,7 +4367,7 @@ class CursorPage extends core_1.AbstractPage {
 }
 exports.CursorPage = CursorPage;
 
-},{"./core.js":10}],20:[function(require,module,exports){
+},{"./core.js":9}],19:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -4457,7 +4379,7 @@ class APIResource {
 }
 exports.APIResource = APIResource;
 
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -4504,7 +4426,7 @@ exports.Audio = Audio;
     Audio.Speech = SpeechAPI.Speech;
 })(Audio = exports.Audio || (exports.Audio = {}));
 
-},{"openai/resource":20,"openai/resources/audio/speech":22,"openai/resources/audio/transcriptions":23,"openai/resources/audio/translations":24}],22:[function(require,module,exports){
+},{"openai/resource":19,"openai/resources/audio/speech":21,"openai/resources/audio/transcriptions":22,"openai/resources/audio/translations":23}],21:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -4522,7 +4444,7 @@ exports.Speech = Speech;
 (function (Speech) {
 })(Speech = exports.Speech || (exports.Speech = {}));
 
-},{"openai/resource":20}],23:[function(require,module,exports){
+},{"openai/resource":19}],22:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -4541,7 +4463,7 @@ exports.Transcriptions = Transcriptions;
 (function (Transcriptions) {
 })(Transcriptions = exports.Transcriptions || (exports.Transcriptions = {}));
 
-},{"openai/core":10,"openai/resource":20}],24:[function(require,module,exports){
+},{"openai/core":9,"openai/resource":19}],23:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -4560,7 +4482,7 @@ exports.Translations = Translations;
 (function (Translations) {
 })(Translations = exports.Translations || (exports.Translations = {}));
 
-},{"openai/core":10,"openai/resource":20}],25:[function(require,module,exports){
+},{"openai/core":9,"openai/resource":19}],24:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -4657,7 +4579,7 @@ exports.AssistantsPage = AssistantsPage;
     Assistants.AssistantFilesPage = FilesAPI.AssistantFilesPage;
 })(Assistants = exports.Assistants || (exports.Assistants = {}));
 
-},{"openai/core":10,"openai/pagination":19,"openai/resource":20,"openai/resources/beta/assistants/assistants":25,"openai/resources/beta/assistants/files":26}],26:[function(require,module,exports){
+},{"openai/core":9,"openai/pagination":18,"openai/resource":19,"openai/resources/beta/assistants/assistants":24,"openai/resources/beta/assistants/files":25}],25:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -4739,7 +4661,7 @@ exports.AssistantFilesPage = AssistantFilesPage;
     Files.AssistantFilesPage = FilesAPI.AssistantFilesPage;
 })(Files = exports.Files || (exports.Files = {}));
 
-},{"openai/core":10,"openai/pagination":19,"openai/resource":20,"openai/resources/beta/assistants/files":26}],27:[function(require,module,exports){
+},{"openai/core":9,"openai/pagination":18,"openai/resource":19,"openai/resources/beta/assistants/files":25}],26:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -4787,7 +4709,7 @@ exports.Beta = Beta;
     Beta.Threads = ThreadsAPI.Threads;
 })(Beta = exports.Beta || (exports.Beta = {}));
 
-},{"openai/resource":20,"openai/resources/beta/assistants/assistants":25,"openai/resources/beta/chat/chat":28,"openai/resources/beta/threads/threads":34}],28:[function(require,module,exports){
+},{"openai/resource":19,"openai/resources/beta/assistants/assistants":24,"openai/resources/beta/chat/chat":27,"openai/resources/beta/threads/threads":33}],27:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -4828,7 +4750,7 @@ exports.Chat = Chat;
     Chat.Completions = CompletionsAPI.Completions;
 })(Chat = exports.Chat || (exports.Chat = {}));
 
-},{"openai/resource":20,"openai/resources/beta/chat/completions":29}],29:[function(require,module,exports){
+},{"openai/resource":19,"openai/resources/beta/chat/completions":28}],28:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -4868,7 +4790,7 @@ class Completions extends resource_1.APIResource {
 }
 exports.Completions = Completions;
 
-},{"openai/lib/ChatCompletionRunner":14,"openai/lib/ChatCompletionStream":15,"openai/lib/ChatCompletionStreamingRunner":16,"openai/lib/RunnableFunction":17,"openai/resource":20}],30:[function(require,module,exports){
+},{"openai/lib/ChatCompletionRunner":13,"openai/lib/ChatCompletionStream":14,"openai/lib/ChatCompletionStreamingRunner":15,"openai/lib/RunnableFunction":16,"openai/resource":19}],29:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -4929,7 +4851,7 @@ exports.MessageFilesPage = MessageFilesPage;
     Files.MessageFilesPage = FilesAPI.MessageFilesPage;
 })(Files = exports.Files || (exports.Files = {}));
 
-},{"openai/core":10,"openai/pagination":19,"openai/resource":20,"openai/resources/beta/threads/messages/files":30}],31:[function(require,module,exports){
+},{"openai/core":9,"openai/pagination":18,"openai/resource":19,"openai/resources/beta/threads/messages/files":29}],30:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -5017,7 +4939,7 @@ exports.ThreadMessagesPage = ThreadMessagesPage;
     Messages.MessageFilesPage = FilesAPI.MessageFilesPage;
 })(Messages = exports.Messages || (exports.Messages = {}));
 
-},{"openai/core":10,"openai/pagination":19,"openai/resource":20,"openai/resources/beta/threads/messages/files":30,"openai/resources/beta/threads/messages/messages":31}],32:[function(require,module,exports){
+},{"openai/core":9,"openai/pagination":18,"openai/resource":19,"openai/resources/beta/threads/messages/files":29,"openai/resources/beta/threads/messages/messages":30}],31:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -5127,7 +5049,7 @@ exports.RunsPage = RunsPage;
     Runs.RunStepsPage = StepsAPI.RunStepsPage;
 })(Runs = exports.Runs || (exports.Runs = {}));
 
-},{"openai/core":10,"openai/pagination":19,"openai/resource":20,"openai/resources/beta/threads/runs/runs":32,"openai/resources/beta/threads/runs/steps":33}],33:[function(require,module,exports){
+},{"openai/core":9,"openai/pagination":18,"openai/resource":19,"openai/resources/beta/threads/runs/runs":31,"openai/resources/beta/threads/runs/steps":32}],32:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -5188,7 +5110,7 @@ exports.RunStepsPage = RunStepsPage;
     Steps.RunStepsPage = StepsAPI.RunStepsPage;
 })(Steps = exports.Steps || (exports.Steps = {}));
 
-},{"openai/core":10,"openai/pagination":19,"openai/resource":20,"openai/resources/beta/threads/runs/steps":33}],34:[function(require,module,exports){
+},{"openai/core":9,"openai/pagination":18,"openai/resource":19,"openai/resources/beta/threads/runs/steps":32}],33:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -5283,7 +5205,7 @@ exports.Threads = Threads;
     Threads.ThreadMessagesPage = MessagesAPI.ThreadMessagesPage;
 })(Threads = exports.Threads || (exports.Threads = {}));
 
-},{"openai/core":10,"openai/resource":20,"openai/resources/beta/threads/messages/messages":31,"openai/resources/beta/threads/runs/runs":32}],35:[function(require,module,exports){
+},{"openai/core":9,"openai/resource":19,"openai/resources/beta/threads/messages/messages":30,"openai/resources/beta/threads/runs/runs":31}],34:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -5324,7 +5246,7 @@ exports.Chat = Chat;
     Chat.Completions = CompletionsAPI.Completions;
 })(Chat = exports.Chat || (exports.Chat = {}));
 
-},{"openai/resource":20,"openai/resources/chat/completions":36}],36:[function(require,module,exports){
+},{"openai/resource":19,"openai/resources/chat/completions":35}],35:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -5339,7 +5261,7 @@ exports.Completions = Completions;
 (function (Completions) {
 })(Completions = exports.Completions || (exports.Completions = {}));
 
-},{"openai/resource":20}],37:[function(require,module,exports){
+},{"openai/resource":19}],36:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -5349,7 +5271,7 @@ Object.defineProperty(exports, "Chat", { enumerable: true, get: function () { re
 var completions_1 = require("./completions.js");
 Object.defineProperty(exports, "Completions", { enumerable: true, get: function () { return completions_1.Completions; } });
 
-},{"./chat.js":35,"./completions.js":36}],38:[function(require,module,exports){
+},{"./chat.js":34,"./completions.js":35}],37:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -5364,7 +5286,7 @@ exports.Completions = Completions;
 (function (Completions) {
 })(Completions = exports.Completions || (exports.Completions = {}));
 
-},{"openai/resource":20}],39:[function(require,module,exports){
+},{"openai/resource":19}],38:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -5382,7 +5304,7 @@ exports.Embeddings = Embeddings;
 (function (Embeddings) {
 })(Embeddings = exports.Embeddings || (exports.Embeddings = {}));
 
-},{"openai/resource":20}],40:[function(require,module,exports){
+},{"openai/resource":19}],39:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -5499,7 +5421,7 @@ exports.FileObjectsPage = FileObjectsPage;
     Files.FileObjectsPage = FilesAPI.FileObjectsPage;
 })(Files = exports.Files || (exports.Files = {}));
 
-},{"openai/core":10,"openai/error":11,"openai/pagination":19,"openai/resource":20,"openai/resources/files":40}],41:[function(require,module,exports){
+},{"openai/core":9,"openai/error":10,"openai/pagination":18,"openai/resource":19,"openai/resources/files":39}],40:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -5542,7 +5464,7 @@ exports.FineTuning = FineTuning;
     FineTuning.FineTuningJobEventsPage = JobsAPI.FineTuningJobEventsPage;
 })(FineTuning = exports.FineTuning || (exports.FineTuning = {}));
 
-},{"openai/resource":20,"openai/resources/fine-tuning/jobs":42}],42:[function(require,module,exports){
+},{"openai/resource":19,"openai/resources/fine-tuning/jobs":41}],41:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -5629,7 +5551,7 @@ exports.FineTuningJobEventsPage = FineTuningJobEventsPage;
     Jobs.FineTuningJobEventsPage = JobsAPI.FineTuningJobEventsPage;
 })(Jobs = exports.Jobs || (exports.Jobs = {}));
 
-},{"openai/core":10,"openai/pagination":19,"openai/resource":20,"openai/resources/fine-tuning/jobs":42}],43:[function(require,module,exports){
+},{"openai/core":9,"openai/pagination":18,"openai/resource":19,"openai/resources/fine-tuning/jobs":41}],42:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -5660,7 +5582,7 @@ exports.Images = Images;
 (function (Images) {
 })(Images = exports.Images || (exports.Images = {}));
 
-},{"openai/core":10,"openai/resource":20}],44:[function(require,module,exports){
+},{"openai/core":9,"openai/resource":19}],43:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -5702,7 +5624,7 @@ Object.defineProperty(exports, "Models", { enumerable: true, get: function () { 
 var moderations_1 = require("./moderations.js");
 Object.defineProperty(exports, "Moderations", { enumerable: true, get: function () { return moderations_1.Moderations; } });
 
-},{"./audio/audio.js":21,"./beta/beta.js":27,"./chat/index.js":37,"./completions.js":38,"./embeddings.js":39,"./files.js":40,"./fine-tuning/fine-tuning.js":41,"./images.js":43,"./models.js":45,"./moderations.js":46,"./shared.js":47}],45:[function(require,module,exports){
+},{"./audio/audio.js":20,"./beta/beta.js":26,"./chat/index.js":36,"./completions.js":37,"./embeddings.js":38,"./files.js":39,"./fine-tuning/fine-tuning.js":40,"./images.js":42,"./models.js":44,"./moderations.js":45,"./shared.js":46}],44:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -5767,7 +5689,7 @@ exports.ModelsPage = ModelsPage;
     Models.ModelsPage = ModelsAPI.ModelsPage;
 })(Models = exports.Models || (exports.Models = {}));
 
-},{"openai/pagination":19,"openai/resource":20,"openai/resources/models":45}],46:[function(require,module,exports){
+},{"openai/pagination":18,"openai/resource":19,"openai/resources/models":44}],45:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -5785,12 +5707,12 @@ exports.Moderations = Moderations;
 (function (Moderations) {
 })(Moderations = exports.Moderations || (exports.Moderations = {}));
 
-},{"openai/resource":20}],47:[function(require,module,exports){
+},{"openai/resource":19}],46:[function(require,module,exports){
 "use strict";
 // File generated from our OpenAPI spec by Stainless.
 Object.defineProperty(exports, "__esModule", { value: true });
 
-},{}],48:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 (function (Buffer){(function (){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -6141,7 +6063,7 @@ function readableStreamAsyncIterable(stream) {
 exports.readableStreamAsyncIterable = readableStreamAsyncIterable;
 
 }).call(this)}).call(this,require("buffer").Buffer)
-},{"./_shims/index.js":7,"./error.js":11,"buffer":3,"openai/error":11}],49:[function(require,module,exports){
+},{"./_shims/index.js":6,"./error.js":10,"buffer":2,"openai/error":10}],48:[function(require,module,exports){
 (function (Buffer){(function (){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -6307,13 +6229,13 @@ const addFormValue = async (form, key, value) => {
 };
 
 }).call(this)}).call(this,require("buffer").Buffer)
-},{"./_shims/index.js":7,"buffer":3}],50:[function(require,module,exports){
+},{"./_shims/index.js":6,"buffer":2}],49:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VERSION = void 0;
 exports.VERSION = '4.28.4'; // x-release-please-version
 
-},{}],51:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -6499,4 +6421,163 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[1]);
+},{}],51:[function(require,module,exports){
+const OpenAI = require("openai");
+const openai = new OpenAI({
+    apiKey: '',
+    dangerouslyAllowBrowser: true
+});
+
+
+const counter = document.querySelector('.counter');
+const btn = document.querySelector('.buttons');
+const secondsInput = document.getElementById('seconds');
+const title = document.querySelector('.title');
+title.innerHTML += (localStorage.getItem('chore') || "Activity");
+
+
+
+var seconds;
+var minuts;
+var remseconds;
+var toCount;
+
+function subm(){
+    display("submit", "start");
+    seconds = Number(secondsInput.value);
+    secondsInput.style.display = "none";
+    counting();
+}
+
+function display(first, second){
+	document.getElementById(first).style.display = "none";
+	document.getElementById(second).style.display = "block";
+}
+
+function check(stat){
+	toCount = stat.value;
+	if(stat.id == "start"){
+		display("start", "stop");
+	}
+	else if(stat.id == "stop"){
+		display("stop", "continue");
+	}
+	else{
+		display('continue', "stop");
+	}
+}
+
+function count(){
+	if(seconds > 0){
+       if(toCount == true){
+            seconds--;
+            remseconds = seconds % 60;
+            minuts = Math.floor(seconds / 60);
+
+            if(remseconds < 10){
+       	        remseconds = "0" + remseconds;
+            }
+
+            if(minuts < 10){
+       	        minuts = "0" + minuts;
+            }
+
+            counter.innerHTML = minuts + " : " + remseconds;
+       }
+	}
+	else{
+		counter.innerHTML = "Done!";
+		btn.style.opacity = '0';
+	}
+}
+
+function counting(){
+	remseconds = seconds % 60;
+minuts = Math.floor(seconds / 60);
+
+if(remseconds < 10){
+    remseconds = "0" + remseconds;
+}
+
+if(minuts < 10){
+    minuts = "0" + minuts;
+}
+
+counter.innerHTML = minuts + " : " + remseconds;
+   setInterval(count, 1000);
+}
+
+const start = document.getElementById('start');
+const stop = document.getElementById('stop');
+const cont = document.getElementById('continue');
+const submit = document.getElementById('submit');
+stop.addEventListener('click', () => {
+	check(stop);
+})
+cont.addEventListener('click', () => {
+	check(cont);
+})
+start.addEventListener('click', () => {
+	check(start);
+})
+submit.addEventListener('click', () =>{
+	subm()
+})
+
+
+const rec = document.getElementById('rec');
+rec.innerHTML += `${localStorage.getItem('rec')}`;
+const recTime = document.getElementById('recTime');
+recTime.innerHTML += `${localStorage.getItem('recTime')}`;
+const changeRec = (way) => {
+	rec.innerHTML = '';
+	rec.innerHTML += `Make it fun! ${way}`;
+}
+
+const getDiff = async () => {
+    const res = await openai.chat.completions.create({
+        model: 'gpt-3.5-turbo',
+        messages: [
+            {
+                role: 'user',
+                content: 'Give a list of fun ways to mop in a JSON array',
+            },
+        ],
+        temperature: 0.8,
+        max_tokens: 500,
+        top_p: .1,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+    })
+    
+    const processed = JSON.parse(res.choices[0].message.content);
+    
+    const key = Object.keys(processed)[0];
+    
+	return processed[key];
+
+}
+
+
+const more = document.getElementById('more');
+let ways = []
+let curr = 1;
+more.addEventListener('click', async () => {
+	if (ways.length == 0)
+	{
+		ways = await getDiff();
+		console.log(ways)
+	}
+	
+		
+	localStorage.setItem('rec', ways[curr]);
+	curr++;
+	if (curr == ways.length)
+	{
+		curr = 0;
+	}	
+	
+	changeRec(ways[curr]);
+})
+
+},{"openai":11}]},{},[51]);
