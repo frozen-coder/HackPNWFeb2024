@@ -21,5 +21,22 @@ const getRes = async () => {
     console.log(res.choices[0].message.content);
 
 }
+const getDiff = async () => {
+    const res = await openai.chat.completions.create({
+        model: 'gpt-3.5-turbo',
+        messages: [
+            {
+                role: 'user',
+                content: 'Give a list of fun ways to wash dishes',
+            },
+        ],
+        temperature: 0.8,
+        max_tokens: 500,
+        top_p: .1,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+    })
+    console.log(res.choices[0].message.content);
 
-getRes();
+}
+getDiff();

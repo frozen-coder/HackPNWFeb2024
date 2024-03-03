@@ -1,6 +1,10 @@
 const counter = document.querySelector('.counter');
 const btn = document.querySelector('.buttons');
 const secondsInput = document.getElementById('seconds');
+const title = document.querySelector('.title');
+title.innerHTML += (localStorage.getItem('chore') || "Activity");
+
+
 
 var seconds;
 var minuts;
@@ -71,4 +75,8 @@ if(minuts < 10){
 counter.innerHTML = minuts + " : " + remseconds;
    setInterval(count, 1000);
 }
+const rec = document.getElementById('rec');
+rec.innerHTML += `${localStorage.getItem('rec')}`;
+const recTime = document.getElementById('recTime');
+recTime.innerHTML += `${localStorage.getItem('recTime')}`;
 

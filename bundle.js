@@ -7,7 +7,7 @@ const openai = new OpenAI({
 
 const choreForm = document.getElementById('choreForm');
 const choresList = document.getElementById('choresList');
-let chores = ["Sweep the floor", "Wash the Dishes", "Take out the trash", "Cook breakfast"];
+let chores = ["Sweep the floor", "Wash the Dishes", "Cook breakfast"];
 
 
 choreForm.addEventListener('submit', (event) => {
@@ -47,9 +47,12 @@ const showPopup = async (choreItem) => {
     message = JSON.parse(message);
     console.log(message[0]);
     console.log("Recommended time: " + message[1]);
-    localStorage.setItem('seconds', message[1]);
+    localStorage.setItem('recTime', message[1]);
+    localStorage.setItem('rec', message[0]);
+    localStorage.setItem('chore', choreItem.textContent);
 
     choreItem.innerHTML = choreItem.innerHTML.replace('<div class="spinwheel"></div>', '');
+    window.open("testTimer.html", "_blank")
 
 
 }
@@ -59,7 +62,7 @@ const getRes = async (chore) => {
         messages: [
             {
                 role: 'user',
-                content: `Return single layer array with fun way to ${chore} on index 0, recommended time (in seconds) on index 1`,
+                content: `Return single layer array with fun way to ${chore} on index 0, recommended amount of time to take on index 1`,
             },
         ],
         temperature: 0,

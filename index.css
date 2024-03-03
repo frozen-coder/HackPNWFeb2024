@@ -28,17 +28,20 @@ body {
     padding: 20px 0px 50px 30px;
 }
 .popup {
-    background-color: rgb(195, 193, 193);
+    background-color: rgb(207, 205, 205);
     
     border:none;
     cursor: pointer;
+    font-weight: bold;
+    
 }
 .taskDiv {
-    background-color: rgb(195, 193, 193);
-    margin: 3vh;
+    background-color: rgb(207, 205, 205);
+    margin: 2%;
     width: 75%;
-    height: 12vh;
+    height: 85px;
     border-radius: 15px;
+    
     
 
 }
